@@ -1,0 +1,31 @@
+syntax = "proto3";
+package pb;
+
+message Request {
+	enum RequestType {
+		RELAY = 0;
+		ID = 1;
+		LIST = 2;
+	}
+	RequestType request_type = 1;
+	RelayRequest relay_request = 2;
+}
+
+enum MsgType {
+	UNKNOWN = 0;
+	TEXT = 1;
+	JSON = 2;
+	BINARY = 3;
+}
+
+message Response {
+	uint64 from = 1;
+	MsgType msg_type = 2;
+	bytes msg = 3;
+}
+
+message RelayRequest {
+	repeated uint64 user_ids = 1;
+	MsgType msg_type = 2;
+	bytes msg = 3;
+}
